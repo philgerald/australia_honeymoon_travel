@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="2026 澳洲蜜月旅行的航班、住宿、每日行程與景點位置">
+<meta name="theme-color" content="#1f6f8b">
+<title>澳洲蜜月手帳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600&display=swap">
+<style>
+/* Layout: quiet travel booklet — plain header, text tab bar, sections separated by space and hairlines, one 760px column */
+:root {
+  --bg: #f5f7f6;
+  --surface: #ffffff;
+  --ink: #1f2a2e;
+  --sub: #5f6d72;
+  --line: #dde3e2;
+  --accent: #1f6f8b;      /* harbour blue */
+  --accent-soft: #e4eff3;
+  --gum: #4f7d63;         /* eucalyptus */
+  --gum-soft: #e6efe9;
+  --warn: #9a5516;
+  --warn-soft: #fbf1e4;
+  --on-accent: #ffffff;
+  --serif: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --sans: system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a1c; --surface: #1c2427; --ink: #e6ecec; --sub: #9aa9ad; --line: #2e3a3d;
+    --accent: #72b6cf; --accent-soft: #1d3640; --gum: #8cbf9f; --gum-soft: #20302a;
+    --warn: #e4a96b; --warn-soft: #33281c; --on-accent: #0f1b20;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a1c; --surface: #1c2427; --ink: #e6ecec; --sub: #9aa9ad; --line: #2e3a3d;
+  --accent: #72b6cf; --accent-soft: #1d3640; --gum: #8cbf9f; --gum-soft: #20302a;
+  --warn: #e4a96b; --warn-soft: #33281c; --on-accent: #0f1b20;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.65; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; }
+
+header { padding-block: 28px 18px; }
+.eyebrow { font-size: .78rem; letter-spacing: .12em; color: var(--sub); }
+h1 { font-family: var(--serif); font-weight: 600; font-size: 1.75rem; margin: 4px 0 2px; text-wrap: balance; }
+.header-sub { color: var(--sub); font-size: .92rem; }
+
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; gap: 4px; overflow-x: auto; }
+nav button { flex: 0 0 auto; padding: 11px 12px; border: 0; background: none; color: var(--sub); font: inherit; font-size: .94rem; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+nav button.active { color: var(--ink); border-bottom-color: var(--accent); font-weight: 600; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+main { padding-block: 8px 40px; }
+.block { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-top: 16px; }
+.block > h2 { font-size: 1.02rem; margin: 0 0 4px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.block > .lead { color: var(--sub); font-size: .88rem; margin: 0 0 10px; }
+.block.note { background: var(--warn-soft); border-color: transparent; }
+.block.note h2 { color: var(--warn); }
+.muted { color: var(--sub); font-size: .86rem; }
+.tag { font-size: .74rem; font-weight: 600; padding: 1px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.tag.gum { background: var(--gum-soft); color: var(--gum); }
+.tag.warn { background: var(--warn-soft); color: var(--warn); }
+ul.plain { margin: 0; padding-left: 1.1em; }
+ul.plain li { padding: 3px 0; }
+
+.btn { display: inline-flex; align-items: center; min-height: 38px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--accent); font: inherit; font-size: .9rem; font-weight: 600; text-decoration: none; cursor: pointer; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+.row { display: grid; grid-template-columns: 5.2em 1fr; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.row:first-of-type { border-top: 0; }
+.row .k { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; font-size: .9rem; }
+.row .v { min-width: 0; }
+.row .n { display: block; color: var(--sub); font-size: .85rem; }
+
+/* today */
+.today-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.today-num { font-family: var(--serif); font-size: 2.1rem; font-weight: 600; color: var(--accent); line-height: 1.2; }
+.check { display: grid; grid-template-columns: 22px 4.4em 1fr; gap: 10px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line); }
+.check:first-child { border-top: 0; }
+.check input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--accent); }
+.check .k { color: var(--accent); font-weight: 600; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.check.done .v { color: var(--sub); text-decoration: line-through; }
+.check .n { display: block; color: var(--sub); font-size: .85rem; text-decoration: none; }
+ul.bare { list-style: none; margin: 0; padding: 0; }
+
+/* prep */
+.meter { display: flex; align-items: center; gap: 12px; }
+.bar { flex: 1; height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--gum); transition: width .2s; }
+.prep { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+.prep:first-child { border-top: 0; }
+.prep input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--gum); }
+.prep.done .t { color: var(--sub); text-decoration: line-through; }
+.prep .t { font-weight: 600; }
+
+/* overview */
+.flight { display: grid; grid-template-columns: 1fr auto 1fr; gap: 4px 10px; align-items: end; padding: 12px 0; border-top: 1px solid var(--line); }
+.flight:first-of-type { border-top: 0; }
+.flight .meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-size: .88rem; }
+.ft { font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.arrow { color: var(--sub); padding-bottom: 18px; }
+.flight .r { text-align: right; }
+.hotel { padding: 12px 0; border-top: 1px solid var(--line); }
+.hotel:first-of-type { border-top: 0; }
+.hotel h3 { font-size: .98rem; margin: 0 0 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+dl.kv { display: grid; grid-template-columns: 5.5em 1fr; gap: 2px 12px; margin: 0; font-size: .88rem; }
+dl.kv dt { color: var(--sub); }
+dl.kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px 8px 0; border-top: 1px solid var(--line); }
+th { color: var(--sub); font-weight: 600; border-top: 0; white-space: nowrap; }
+td.nw { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.leg-day { margin: 14px 0 2px; font-weight: 600; font-size: .9rem; }
+.leg { display: grid; grid-template-columns: 3.4em 1fr; gap: 10px; padding: 6px 0; font-size: .9rem; }
+.leg .n { display: block; color: var(--sub); font-size: .85rem; }
+
+/* itinerary */
+.dates { display: flex; gap: 6px; overflow-x: auto; padding-block: 14px 2px; }
+.dates button { flex: 0 0 auto; display: grid; justify-items: center; min-width: 52px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; }
+.dates button small { color: var(--sub); font-size: .72rem; }
+.dates button b { font-variant-numeric: tabular-nums; font-size: .92rem; }
+.dates button.active { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.dates button.active small { color: var(--on-accent); opacity: .85; }
+
+/* map */
+.seg { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.seg button { padding: 5px 12px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface); color: var(--ink); font: inherit; font-size: .86rem; cursor: pointer; }
+.seg button.active { border-color: var(--accent); color: var(--accent); font-weight: 600; background: var(--accent-soft); }
+.map { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.map svg { display: block; width: 100%; height: auto; }
+.poi { display: grid; grid-template-columns: 1.8em 1fr auto; gap: 10px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--line); font-size: .9rem; }
+.poi:first-child { border-top: 0; }
+.num { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%; font-size: .74rem; font-weight: 700; color: var(--on-accent); background: var(--accent); }
+.num.stay { background: var(--gum); }
+.poi a { color: var(--accent); font-size: .85rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+/* help */
+.phones { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.phone { padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+.phone strong { display: block; font-size: 1.2rem; font-variant-numeric: tabular-nums; color: var(--ink); user-select: all; }
+.phone.em strong { color: var(--warn); }
+.contact { padding: 10px 0; border-top: 1px solid var(--line); }
+.contact:first-child { border-top: 0; }
+.tel { font-variant-numeric: tabular-nums; user-select: all; }
+.copy-status { min-height: 1.4em; color: var(--gum); font-weight: 600; font-size: .86rem; margin-top: 6px; }
+
+footer { color: var(--sub); font-size: .82rem; padding-block: 0 32px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">PHOEBE &amp; 柏儒・HONEYMOON</div>
+    <h1>澳洲蜜月之旅</h1>
+    <div class="header-sub">2026/10/14（三）– 10/26（一）　雪梨 5 晚・墨爾本 5 晚</div>
+  </div>
+</header>
+
+<nav role="tablist" aria-label="旅行資訊分類">
+  <div class="wrap">
+    <button data-tab="today" class="active" role="tab" aria-selected="true">今日</button>
+    <button data-tab="itinerary" role="tab" aria-selected="false">行程</button>
+    <button data-tab="overview" role="tab" aria-selected="false">機票住宿</button>
+    <button data-tab="map" role="tab" aria-selected="false">地圖</button>
+    <button data-tab="prep" role="tab" aria-selected="false">準備</button>
+    <button data-tab="help" role="tab" aria-selected="false">求助</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section class="tab" id="tab-today"></section>
+  <section class="tab" id="tab-itinerary" hidden>
+    <div class="dates" id="dates" role="tablist" aria-label="選擇日期"></div>
+    <div id="day-content"></div>
+  </section>
+  <section class="tab" id="tab-overview" hidden></section>
+  <section class="tab" id="tab-map" hidden>
+    <div class="block">
+      <h2>景點相對位置</h2>
+      <p class="lead">依實際經緯度等比例畫出，點地名可開 Google 地圖。</p>
+      <div class="seg" id="seg"></div>
+      <div class="map" id="map"></div>
+      <div class="legend muted"><span><span class="num stay">1</span> 住宿</span><span><span class="num">1</span> 景點與交通</span></div>
+      <ul class="bare" id="poi-list" style="margin-top:8px"></ul>
+    </div>
+  </section>
+  <section class="tab" id="tab-prep" hidden></section>
+  <section class="tab" id="tab-help" hidden></section>
+</main>
+
+<footer><div class="wrap">出發前請再核對航班時間。澳洲 10 月為夏令時間，比台灣快 3 小時。</div></footer>
+
+<script>
+const TRIP = {
+  notes: [
+    "澳洲 10 月是夏令時間，雪梨、墨爾本都比台灣快 3 小時。",
+    "兩間 Meriton 各預授權 AUD 2,000 押金，退房後 7 天內退回。入住都要出示護照與信用卡。",
+    "維珍拆成兩張票（IJLTWB／IMFQON），線上報到要分開辦。每人託運 23 公斤、手提 8 公斤，機上無餐點。",
+    "雪梨火車、渡輪、輕軌可直接刷信用卡或手機，兩人各刷各的。墨爾本市區免費電車區外要用 myki。",
+    "10/22 看企鵝、10/25 賞鯨，海邊風大很冷，記得帶防風外套。"
+  ],
+  flights: [
+    { date: "10/14（三）", no: "華航 CI051", dep: ["23:30", "桃園 T2"], arr: ["11:45", "雪梨 T1・10/15"], ref: "EWE746" },
+    { date: "10/20（二）", no: "維珍 VA830", dep: ["10:00", "雪梨 T2"], arr: ["11:35", "墨爾本 T3"], ref: "IJLTWB／IMFQON" },
+    { date: "10/25（日）", no: "維珍 VA811", dep: ["07:00", "墨爾本 T3"], arr: ["08:25", "雪梨 T2"], ref: "IJLTWB／IMFQON" },
+    { date: "10/25（日）", no: "華航 CI052", dep: ["22:10", "雪梨 T1"], arr: ["04:20", "桃園 T2・10/26"], ref: "EWE746" }
+  ],
+  lodging: [
+    { name: "Wildlife Retreat at Taronga", dates: "10/15–10/16・1 晚", address: "2a Bradleys Head Rd, Mosman NSW", phone: "+61 2 9932 4888",
+      ref: "6921487707", room: "動物景觀房，含早餐與動物園門票", price: "AUD 737.10", deposit: "AUD 100", times: "14:00 入住／10:00 前退房", cancel: "10/7 23:59" },
+    { name: "Meriton Suites Sussex Street", dates: "10/16–10/20・4 晚", address: "234 Sussex St, Sydney NSW", phone: "+61 2 9277 1111",
+      ref: "6316681103", room: "單臥室套房，不含餐", price: "AUD 1,760", deposit: "AUD 2,000", times: "15:00 入住／10:00 前退房", cancel: "10/14 23:59" },
+    { name: "Meriton Suites Melbourne", dates: "10/20–10/25・5 晚", address: "140 King St, Melbourne VIC", phone: "+61 2 9277 1111",
+      ref: "5427757778", room: "迷你單房公寓，不含餐", price: "AUD 1,125", deposit: "AUD 2,000", times: "15:00 入住／10:00 前退房", cancel: "10/18 23:59" }
+  ],
+  activities: [
+    ["10/15 17:30", "Me-Gal 晚餐", "Taronga Zoo・SevenRooms，訂位人 POJU CHEN"],
+    ["10/16 20:00", "雪梨德比足球賽", "Ticketmaster 61-54267/AU2・BAY226 V 排 11、12 號"],
+    ["10/17 08:00", "藍山＋Featherdale 一日遊", "AUD 179／人・預訂單位待補"],
+    ["10/19 09:45", "雪梨歌劇院中文導覽＋用餐", "Klook App"],
+    ["10/19 19:00", "SkyFeast 旋轉餐廳", "Klook App・靠窗座位"],
+    ["10/22 07:30", "蒸汽小火車＋企鵝島", "老墨旅遊 0003889"],
+    ["10/24 09:00", "疏芬山淘金鎮", "老墨旅遊 0003889・AUD 198／人"],
+    ["10/25 13:30", "Captain Cook 賞鯨", "2FRRJN・13:10 前到 6 號碼頭"]
+  ],
+  transport: [
+    { day: "10/14", items: [["已訂", "樹林家 → 桃園 T2", "Klook 送機，20:30 上車"]] },
+    { day: "10/15", items: [["已訂", "雪梨 T1 → Taronga", "Klook 接機（Elife #18533155），約 30 分鐘，司機 Jinling Huang"]] },
+    { day: "10/16", items: [["建議", "Taronga → Sussex St", "Uber 約 25–30 分鐘、AUD 35–50；或 F2 渡輪到 Circular Quay"], ["建議", "飯店 → Allianz 球場", "QVB 站搭 L2／L3 輕軌到 Moore Park，19:00 出發"]] },
+    { day: "10/17", items: [["跟團", "飯店 ⇄ 藍山", "郵遞區號 2000 內可申請免費上門接送"]] },
+    { day: "10/18–19", items: [["建議", "博物館、歌劇院、雪梨塔", "都在步行範圍；趕時間從 Town Hall 搭火車"]] },
+    { day: "10/20", items: [["建議", "飯店 → 雪梨 T2", "07:30 叫 Uber，約 20–30 分鐘"], ["建議", "墨爾本 T3 → 飯店", "SkyBus 到 Southern Cross 約 30 分鐘，再走 5–10 分鐘"]] },
+    { day: "10/21–24", items: [["建議", "墨爾本市區", "免費電車區內；出區用 myki"], ["跟團", "10/22、10/24 一日遊", "老墨旅遊接送"]] },
+    { day: "10/25", items: [["已訂", "Meriton → 墨爾本 T3", "Klook KAJ241154，04:45 大廳上車；行李上限 2 件 26 吋＋背包"], ["建議", "雪梨 T2 → Central", "機場線約 10 分鐘，寄放行李 AKVZ-210926"], ["建議", "Central → 雪梨 T1", "機場線約 15 分鐘，18:30 出發"]] },
+    { day: "10/26", items: [["已訂", "桃園 T2 → 樹林家", "Klook 接機"]] }
+  ],
+  days: [
+    { date: "10/14", wd: "三", label: "出發", city: "台北", items: [
+      ["20:30", "Klook 送機，從樹林家出發", "前往桃園機場第二航廈"],
+      ["抵達後", "華航櫃檯報到、託運行李", ""],
+      ["23:30", "CI051 起飛", "隔天中午抵達雪梨"] ] },
+    { date: "10/15", wd: "四", label: "抵達雪梨，住動物園", city: "雪梨", items: [
+      ["11:45", "抵達雪梨 T1，入境領行李", ""],
+      ["入境後", "Klook 接機到 Wildlife Retreat", "約 30 分鐘，含 60 分鐘免費等候"],
+      ["14:00", "入住 Wildlife Retreat at Taronga", "動物景觀房"],
+      ["17:30", "Me-Gal 晚餐", "園內步行數分鐘"] ] },
+    { date: "10/16", wd: "五", label: "動物園、雪梨德比", city: "雪梨", items: [
+      ["早上", "逛 Taronga 動物園", "門票含在房價"],
+      ["10:00", "退房前往市區", "Uber 約 25–30 分鐘，或 F2 渡輪"],
+      ["15:00", "入住 Meriton Sussex St", "15:00 前可先寄放行李"],
+      ["19:00", "出發看球", "QVB 站搭 L2／L3 到 Moore Park"],
+      ["20:00", "雪梨 FC 對西雪梨流浪者", "BAY226 區 V 排 11、12 號，票在 Ticketmaster App"] ] },
+    { date: "10/17", wd: "六", label: "藍山一日遊", city: "雪梨", items: [
+      ["08:00", "唐人街 Furama 酒店門口出發", ""],
+      ["09:30", "Featherdale 動物園", "餵袋鼠、與無尾熊拍照"],
+      ["11:30", "Scenic World", "四種纜車；午餐自費"],
+      ["14:30", "回音谷看三姊妹峰", ""],
+      ["15:00", "盧拉小鎮", ""],
+      ["18:00", "回到唐人街", ""] ] },
+    { date: "10/18", wd: "日", label: "睡飽、博物館", city: "雪梨", items: [
+      ["上午", "睡飽、自由活動", ""],
+      ["午後", "澳洲博物館恐龍展", "一般入場免費，10:00–17:00，約 2–3 小時"],
+      ["傍晚", "穿過海德公園到聖瑪麗大教堂", ""] ] },
+    { date: "10/19", wd: "一", label: "歌劇院、旋轉餐廳", city: "雪梨", items: [
+      ["09:15", "從飯店出發", "步行約 25 分鐘，或火車到 Circular Quay"],
+      ["09:45", "雪梨歌劇院中文導覽與用餐", "60 分鐘，憑證在 Klook App"],
+      ["中午", "岩石區、環形碼頭散步回飯店", ""],
+      ["19:00", "雪梨塔 SkyFeast 晚餐", "從飯店步行約 10 分鐘"] ] },
+    { date: "10/20", wd: "二", label: "飛往墨爾本", city: "墨爾本", items: [
+      ["07:30", "退房，Uber 到雪梨 T2", ""],
+      ["10:00", "VA830 起飛", ""],
+      ["11:35", "抵達墨爾本 T3", "SkyBus 到 Southern Cross 站"],
+      ["15:00", "入住 Meriton Suites Melbourne", ""] ] },
+    { date: "10/21", wd: "三", label: "休息日", city: "墨爾本", items: [
+      ["全天", "自由活動、休息", "女王維多利亞市場週三公休"],
+      ["今天", "老墨旅遊請款單到期", "0003889，AUD 854"] ] },
+    { date: "10/22", wd: "四", label: "蒸汽小火車、企鵝島", city: "墨爾本", items: [
+      ["07:30", "市區集合（07:30–08:30）", "請確認接送地點"],
+      ["10:00", "Puffing Billy 蒸汽小火車", ""],
+      ["14:30", "Maru 動物園", "自費"],
+      ["17:00", "諾比斯角", ""],
+      ["18:00", "企鵝歸巢", "海邊很冷，帶外套"],
+      ["21:00", "回到市區", ""] ] },
+    { date: "10/23", wd: "五", label: "自由日", city: "墨爾本", items: [
+      ["全天", "墨爾本自由活動", ""] ] },
+    { date: "10/24", wd: "六", label: "疏芬山淘金鎮", city: "墨爾本", items: [
+      ["09:00", "飯店上門接送（09:00–10:00）", ""],
+      ["上午", "Ballarat 電車博物館、環湖電車", ""],
+      ["14:00", "疏芬山淘金小鎮", "含金礦、下礦體驗；午餐自費"],
+      ["19:00", "回到市區", ""],
+      ["晚上", "VA811 線上報到，早點睡", "兩個訂位代號分開辦；明天 04:45 出門"] ] },
+    { date: "10/25", wd: "日", label: "回雪梨，晚上回台", city: "雪梨", items: [
+      ["04:45", "Klook 送機（KAJ241154）", "提早 5 分鐘在大廳等"],
+      ["07:00", "VA811 起飛", ""],
+      ["08:25", "抵達雪梨 T2", "機場線到 Central 約 10 分鐘"],
+      ["09:00", "Central 站寄放行李", "Smarte Carte AKVZ-210926，帶附照片證件"],
+      ["09:30", "環形碼頭、岩石區早午餐", ""],
+      ["10:30", "岩石區週末市集", "到 12:30"],
+      ["13:10", "6 號碼頭報到", "船不等人"],
+      ["13:30", "Captain Cook 賞鯨", "到 16:00；上船前 30 分鐘吃暈船藥"],
+      ["16:00", "碼頭邊休息", "到 17:30"],
+      ["17:45", "Central 附近晚餐", ""],
+      ["18:30", "取行李，機場線到 T1", "約 15 分鐘"],
+      ["22:10", "CI052 起飛", ""] ] },
+    { date: "10/26", wd: "一", label: "回到台灣", city: "台北", items: [
+      ["04:20", "抵達桃園 T2", ""],
+      ["入境後", "Klook 接機回家", "10/27 06:30 出發去香港"] ] }
+  ],
+  regions: [ { id: "syd", name: "雪梨市區" }, { id: "blue", name: "藍山" }, { id: "mel", name: "墨爾本市區" }, { id: "melout", name: "墨爾本近郊" } ],
+  pois: [
+    { r: "syd", day: 2, name: "雪梨機場", lat: -33.9399, lng: 151.1753, note: "10/15 抵達、10/25 轉機" },
+    { r: "syd", day: 2, stay: 1, name: "Wildlife Retreat at Taronga", lat: -33.8434, lng: 151.2441, note: "10/15 住 1 晚" },
+    { r: "syd", day: 3, name: "Taronga 渡輪碼頭", lat: -33.8464, lng: 151.2395, note: "F2 渡輪" },
+    { r: "syd", day: 3, stay: 1, name: "Meriton Suites Sussex Street", lat: -33.8722, lng: 151.2043, note: "10/16–10/20 住 4 晚" },
+    { r: "syd", day: 3, name: "Allianz Stadium", lat: -33.8891, lng: 151.2254, note: "10/16 雪梨德比" },
+    { r: "syd", day: 4, name: "Furama 酒店（唐人街）", lat: -33.8790, lng: 151.2030, note: "10/17 藍山團集合" },
+    { r: "syd", day: 5, name: "澳洲博物館", lat: -33.8743, lng: 151.2133, note: "10/18" },
+    { r: "syd", day: 5, name: "聖瑪麗大教堂", lat: -33.8713, lng: 151.2133, note: "10/18" },
+    { r: "syd", day: 6, name: "雪梨歌劇院", lat: -33.8568, lng: 151.2153, note: "10/19 09:45" },
+    { r: "syd", day: 6, name: "雪梨塔 SkyFeast", lat: -33.8705, lng: 151.2089, note: "10/19 19:00" },
+    { r: "syd", day: 12, name: "Central 站", lat: -33.8826, lng: 151.2065, note: "10/25 寄放行李" },
+    { r: "syd", day: 12, name: "岩石區市集", lat: -33.8599, lng: 151.2090, note: "10/25 上午" },
+    { r: "syd", day: 12, name: "Circular Quay 6 號碼頭", lat: -33.8610, lng: 151.2111, note: "10/25 賞鯨" },
+    { r: "blue", day: 3, stay: 1, name: "Meriton Suites Sussex Street", lat: -33.8722, lng: 151.2043, note: "出發與回程" },
+    { r: "blue", day: 4, name: "Featherdale 動物園", lat: -33.7703, lng: 150.8857, note: "09:30" },
+    { r: "blue", day: 4, name: "Scenic World", lat: -33.7287, lng: 150.3017, note: "11:30" },
+    { r: "blue", day: 4, name: "回音谷", lat: -33.7320, lng: 150.3118, note: "14:30" },
+    { r: "blue", day: 4, name: "盧拉小鎮", lat: -33.7130, lng: 150.3310, note: "15:00" },
+    { r: "mel", day: 7, name: "墨爾本機場 T3", lat: -37.6690, lng: 144.8410, note: "10/20 抵達、10/25 出發" },
+    { r: "mel", day: 7, stay: 1, name: "Meriton Suites Melbourne", lat: -37.8165, lng: 144.9570, note: "10/20–10/25 住 5 晚" },
+    { r: "mel", day: 7, name: "Southern Cross 站", lat: -37.8183, lng: 144.9525, note: "SkyBus 下車處" },
+    { r: "mel", day: 8, name: "女王維多利亞市場", lat: -37.8076, lng: 144.9568, note: "週三公休" },
+    { r: "melout", day: 7, stay: 1, name: "Meriton Suites Melbourne", lat: -37.8165, lng: 144.9570, note: "出發與回程" },
+    { r: "melout", day: 9, name: "Puffing Billy", lat: -37.9095, lng: 145.3555, note: "10/22 10:00" },
+    { r: "melout", day: 9, name: "Maru 動物園", lat: -38.4010, lng: 145.5300, note: "10/22 14:30" },
+    { r: "melout", day: 9, name: "諾比斯角", lat: -38.5160, lng: 145.1110, note: "10/22 17:00" },
+    { r: "melout", day: 9, name: "企鵝歸巢", lat: -38.5110, lng: 145.1500, note: "10/22 18:00" },
+    { r: "melout", day: 11, name: "Ballarat 電車博物館", lat: -37.5600, lng: 143.8460, note: "10/24 上午" },
+    { r: "melout", day: 11, name: "疏芬山淘金鎮", lat: -37.5776, lng: 143.8580, note: "10/24 14:00" }
+  ],
+  prep: [
+    { id: "doc", title: "證件與保險", items: [
+      { id: "name", t: "核對護照英文拼法", n: "機票寫 CHIAYI／POJU，ETA 寫 CHIA YI／PO JU" },
+      { id: "eta", t: "ETA 拿實體護照核對號碼", n: "兩人皆已核准，2027/9/20 前入境有效" },
+      { id: "ins", t: "投保旅平險與旅遊不便險", n: "信箱裡沒找到投保紀錄" } ] },
+    { id: "pay", title: "訂單與付款", items: [
+      { id: "kent", t: "確認 Meriton Kent Street 已取消", n: "取消費應為 AUD 0" },
+      { id: "omt", t: "老墨旅遊請款單 0003889 付款", n: "AUD 854，10/21 到期", due: "10/21" },
+      { id: "blue", t: "藍山一日遊：補預訂單位、申請上門接送", n: "郵遞區號 2000 內免費" },
+      { id: "klook", t: "Klook 三筆接送地址統一里名", n: "目前混用樹德里與樹福里" },
+      { id: "card", t: "信用卡預留押金額度", n: "兩間 Meriton 各 AUD 2,000" } ] },
+    { id: "net", title: "網路與憑證", items: [
+      { id: "esim", t: "確認 eSIM 兩人都有", n: "KKday 26KK260474696" },
+      { id: "app", t: "憑證存到手機離線可看", n: "Klook、Ticketmaster、Booking.com、賞鯨 Reservation Record" } ] },
+    { id: "pack", title: "打包", items: [
+      { id: "coat", t: "防風保暖外套", n: "企鵝島晚上與賞鯨船上很冷" },
+      { id: "sea", t: "暈船藥", n: "10/25 上船前 30 分鐘吃" },
+      { id: "plug", t: "澳洲 I 型（八字型）轉接頭", n: "電壓 230V" },
+      { id: "bag", t: "行李控制在 2 件 26 吋＋背包", n: "10/25 送機車的上限" } ] }
+  ]
+};
+
+const $ = (s) => document.querySelector(s);
+const esc = (v) => String(v ?? "").replace(/[&<>'"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[c]);
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const gmap = (p) => `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}`;
+const sub = (s) => s ? `<span class="n">${esc(s)}</span>` : "";
+
+/* 今日 */
+function dateIn(tz) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en", { timeZone: tz, year: "numeric", month: "numeric", day: "numeric" }).formatToParts(new Date()).filter((x) => x.type !== "literal").map((x) => [x.type, Number(x.value)]));
+  return Date.UTC(p.year, p.month - 1, p.day);
+}
+function tripState() {
+  const stamps = TRIP.days.map((d) => { const [m, dd] = d.date.split("/").map(Number); return Date.UTC(2026, m - 1, dd); });
+  const au = dateIn("Australia/Sydney"), tw = dateIn("Asia/Taipei");
+  const inAus = au >= stamps[1] && au <= stamps[11];
+  const today = inAus ? au : tw;
+  const idx = stamps.indexOf(today);
+  if (idx >= 0) return { i: idx, mode: "today", tz: inAus ? "澳洲時間" : "台灣時間" };
+  if (today < stamps[0]) return { i: 0, mode: "before", days: Math.round((stamps[0] - today) / 86400000) };
+  return { i: TRIP.days.length - 1, mode: "after" };
+}
+function renderToday() {
+  const st = tripState(), d = TRIP.days[st.i];
+  const head = st.mode === "before"
+    ? `<div class="today-head"><span class="today-num">${st.days} 天</span><span>後出發</span></div><p class="muted" style="margin:4px 0 0">10/14（三）20:30 從家出發，23:30 搭 CI051。</p>`
+    : st.mode === "today"
+      ? `<div class="today-head"><span class="today-num">Day ${st.i + 1}</span><span>${esc(d.date)}（${esc(d.wd)}）${esc(d.label)}</span></div><p class="muted" style="margin:4px 0 0">以${st.tz}為準</p>`
+      : `<div class="today-head"><span class="today-num">新婚快樂</span></div><p class="muted" style="margin:4px 0 0">旅程已結束。</p>`;
+  const pending = TRIP.prep.flatMap((c) => c.items.map((it) => ({ c, it }))).filter(({ c, it }) => store.get(`hm:prep:${c.id}:${it.id}`) !== "1");
+  $("#tab-today").innerHTML = `
+    <div class="block">${head}
+      <div class="actions"><button class="btn primary" type="button" id="go-day">看當天完整行程</button>${st.mode === "before" ? `<button class="btn" type="button" id="go-prep">準備清單（還有 ${pending.length} 項）</button>` : ""}</div></div>
+    <div class="block"><h2>${st.mode === "today" ? "今日待辦" : `第一天：${esc(d.date)}（${esc(d.wd)}）${esc(d.label)}`}</h2>
+      <p class="lead">打勾只會記在這支手機。</p>
+      <ul class="bare">${d.items.map((it, j) => {
+        const k = `hm:done:${st.i}:${j}`, on = store.get(k) === "1";
+        return `<li class="check${on ? " done" : ""}"><input type="checkbox" id="c-${st.i}-${j}" data-k="${k}" ${on ? "checked" : ""} aria-label="完成 ${esc(it[1])}"><span class="k">${esc(it[0])}</span><span class="v">${esc(it[1])}${sub(it[2])}</span></li>`;
+      }).join("")}</ul></div>`;
+  $("#go-day").addEventListener("click", () => { showDay(st.i); switchTab("itinerary"); });
+  const gp = $("#go-prep"); if (gp) gp.addEventListener("click", () => switchTab("prep"));
+  document.querySelectorAll(".check input").forEach((c) => c.addEventListener("change", () => { store.set(c.dataset.k, c.checked ? "1" : "0"); c.closest(".check").classList.toggle("done", c.checked); }));
+}
+
+/* 行程 */
+const dates = $("#dates");
+TRIP.days.forEach((d, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.setAttribute("role", "tab");
+  b.innerHTML = `<small>週${esc(d.wd)}</small><b>${esc(d.date)}</b>`;
+  b.addEventListener("click", () => showDay(i));
+  dates.appendChild(b);
+});
+function showDay(i) {
+  [...dates.children].forEach((b, j) => { b.classList.toggle("active", i === j); b.setAttribute("aria-selected", String(i === j)); });
+  const d = TRIP.days[i];
+  $("#day-content").innerHTML = `<div class="block"><h2>Day ${i + 1}　${esc(d.label)} <span class="tag gum">${esc(d.city)}</span></h2>
+    <p class="lead">${esc(d.date)}（${esc(d.wd)}）</p>
+    ${d.items.map((it) => `<div class="row"><span class="k">${esc(it[0])}</span><span class="v">${esc(it[1])}${sub(it[2])}</span></div>`).join("")}</div>`;
+  const b = dates.children[i]; if (b && b.scrollIntoView) b.scrollIntoView({ block: "nearest", inline: "center" });
+}
+
+/* 機票住宿 */
+function renderOverview() {
+  const tagFor = (s) => s === "已訂" ? "tag" : s === "跟團" ? "tag gum" : "tag warn";
+  $("#tab-overview").innerHTML = `
+    <div class="block note"><h2>出發前要知道</h2><ul class="plain">${TRIP.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></div>
+    <div class="block"><h2>航班 <span class="tag">4 段皆已出票</span></h2>
+      ${TRIP.flights.map((f) => `<div class="flight"><div class="meta"><b>${esc(f.date)}</b><span>${esc(f.no)}</span><span class="muted">訂位 ${esc(f.ref)}</span></div>
+        <div><div class="ft">${esc(f.dep[0])}</div><div class="muted">${esc(f.dep[1])}</div></div><div class="arrow" aria-hidden="true">→</div>
+        <div class="r"><div class="ft">${esc(f.arr[0])}</div><div class="muted">${esc(f.arr[1])}</div></div></div>`).join("")}
+      <p class="muted" style="margin:8px 0 0">國際線華航官網訂（EWE746），國內線 Trip.com 訂（1616331722046471）。</p></div>
+    <div class="block"><h2>住宿 <span class="tag">合計 AUD 3,622.10</span></h2>
+      <p class="lead">都在 Booking.com 訂。入住 PIN 碼請看確認信。</p>
+      ${TRIP.lodging.map((l) => `<div class="hotel"><h3>${esc(l.name)} <span class="tag gum">${esc(l.dates)}</span></h3>
+        <dl class="kv"><dt>地址</dt><dd>${esc(l.address)}</dd><dt>電話</dt><dd class="tel">${esc(l.phone)}</dd><dt>訂單編號</dt><dd>${esc(l.ref)}</dd>
+        <dt>房型</dt><dd>${esc(l.room)}</dd><dt>時間</dt><dd>${esc(l.times)}</dd><dt>總價／押金</dt><dd>${esc(l.price)}／${esc(l.deposit)}</dd><dt>免費取消</dt><dd>${esc(l.cancel)} 前</dd></dl></div>`).join("")}</div>
+    <div class="block"><h2>已訂活動</h2>
+      <div class="table-wrap"><table><thead><tr><th>時間</th><th>活動</th><th>憑證</th></tr></thead><tbody>
+      ${TRIP.activities.map((a) => `<tr><td class="nw">${esc(a[0])}</td><td>${esc(a[1])}</td><td class="muted">${esc(a[2])}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="block"><h2>交通</h2>
+      <p class="lead"><span class="tag">已訂</span> 已預約　<span class="tag gum">跟團</span> 業者接送　<span class="tag warn">建議</span> 現場自己搭</p>
+      ${TRIP.transport.map((g) => `<div class="leg-day">${esc(g.day)}</div>${g.items.map((it) => `<div class="leg"><span><span class="${tagFor(it[0])}">${esc(it[0])}</span></span><span>${esc(it[1])}<span class="n">${esc(it[2])}</span></span></div>`).join("")}`).join("")}</div>
+    <div class="block"><h2>接著去香港（10/27–10/29）</h2>
+      <p class="lead">回台隔天就出發，10/26 晚上要整理行李。</p>
+      <div class="row"><span class="k">10/27</span><span class="v">06:30 Klook 送機到桃園 T2</span></div>
+      <div class="row"><span class="k">10/28</span><span class="v">香港迪士尼<span class="n">廣場飯店匠心套餐 ×2，加「惡人反轉大街派對」觀賞區（Klook）</span></span></div>
+      <div class="row"><span class="k">10/29</span><span class="v">22:55 BR858 抵達桃園 T2<span class="n">tms.tw 接機</span></span></div></div>`;
+}
+
+/* 地圖 */
+let region = "syd";
+function renderMap() {
+  const seg = $("#seg");
+  seg.innerHTML = TRIP.regions.map((r) => `<button type="button" data-r="${r.id}" class="${r.id === region ? "active" : ""}">${esc(r.name)}</button>`).join("");
+  seg.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { region = b.dataset.r; renderMap(); }));
+  const pts = TRIP.pois.filter((p) => p.r === region);
+  const W = 640, H = 400, pad = 44;
+  const lat0 = pts.reduce((s, p) => s + p.lat, 0) / pts.length;
+  const kx = 111.32 * Math.cos(lat0 * Math.PI / 180), ky = 110.57;
+  const xs = pts.map((p) => p.lng * kx), ys = pts.map((p) => -p.lat * ky);
+  const minX = Math.min(...xs), minY = Math.min(...ys);
+  const spanX = Math.max(Math.max(...xs) - minX, .5), spanY = Math.max(Math.max(...ys) - minY, .5);
+  const s = Math.min((W - pad * 2) / spanX, (H - pad * 2) / spanY);
+  const ox = (W - spanX * s) / 2, oy = (H - spanY * s) / 2;
+  const steps = [.2, .5, 1, 2, 5, 10, 20, 50, 100], target = (W / 5) / s;
+  const km = steps.reduce((b, v) => Math.abs(v - target) < Math.abs(b - target) ? v : b, steps[0]);
+  const placed = [];
+  const marks = pts.map((p, i) => {
+    let x = ox + (xs[i] - minX) * s, y = oy + (ys[i] - minY) * s;
+    for (const q of placed) if (Math.hypot(q[0] - x, q[1] - y) < 20) { x += 15; y -= 9; }
+    placed.push([x, y]);
+    const fill = p.stay ? "var(--gum)" : "var(--accent)";
+    return `<a href="${gmap(p)}" target="_blank" rel="noopener noreferrer"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="10" fill="${fill}" stroke="var(--surface)" stroke-width="2"/><text x="${x.toFixed(1)}" y="${(y + 3.8).toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--on-accent)">${i + 1}</text><title>${esc(p.name)}</title></a>`;
+  }).join("");
+  let grid = "";
+  for (let x = 40; x < W; x += 40) grid += `<line x1="${x}" y1="0" x2="${x}" y2="${H}"/>`;
+  for (let y = 40; y < H; y += 40) grid += `<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`;
+  const L = (km * s).toFixed(1);
+  $("#map").innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(TRIP.regions.find((r) => r.id === region).name)}地點相對位置">
+    <rect width="${W}" height="${H}" fill="var(--surface)"/><g stroke="var(--line)" stroke-width="1" opacity=".7">${grid}</g>${marks}
+    <g transform="translate(${W - 26},26)" fill="var(--sub)"><path d="M0,-12 L5,4 L0,1 L-5,4 Z"/><text y="16" text-anchor="middle" font-size="10">N</text></g>
+    <g transform="translate(18,${H - 18})" stroke="var(--ink)" stroke-width="2"><line x1="0" y1="0" x2="${L}" y2="0"/><line x1="0" y1="-4" x2="0" y2="4"/><line x1="${L}" y1="-4" x2="${L}" y2="4"/><text x="${(km * s / 2).toFixed(1)}" y="-8" text-anchor="middle" font-size="11" fill="var(--ink)" stroke="none">${km} 公里</text></g></svg>`;
+  $("#poi-list").innerHTML = pts.map((p, i) => `<li class="poi"><span class="num${p.stay ? " stay" : ""}">${i + 1}</span><span>${esc(p.name)} <span class="muted">${esc(p.note)}</span></span><a href="${gmap(p)}" target="_blank" rel="noopener noreferrer">地圖</a></li>`).join("");
+}
+
+/* 準備 */
+function renderPrep() {
+  const keys = TRIP.prep.flatMap((c) => c.items.map((it) => `hm:prep:${c.id}:${it.id}`));
+  const done = keys.filter((k) => store.get(k) === "1").length, pct = Math.round(done / keys.length * 100);
+  $("#tab-prep").innerHTML = `
+    <div class="block"><h2>行前準備</h2><p class="lead">打勾只會記在這支手機。</p>
+      <div class="meter"><b style="font-variant-numeric:tabular-nums">${done}／${keys.length}</b><div class="bar" role="progressbar" aria-label="行前準備進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div></div></div>
+    ${TRIP.prep.map((c) => `<div class="block"><h2>${esc(c.title)}</h2><ul class="bare">${c.items.map((it) => {
+      const k = `hm:prep:${c.id}:${it.id}`, on = store.get(k) === "1";
+      return `<li class="prep${on ? " done" : ""}"><input type="checkbox" id="p-${c.id}-${it.id}" data-k="${k}" ${on ? "checked" : ""} aria-label="完成 ${esc(it.t)}"><span><span class="t">${esc(it.t)}</span>${it.due ? ` <span class="tag warn">${esc(it.due)} 到期</span>` : ""}<span class="n muted" style="display:block">${esc(it.n)}</span></span></li>`;
+    }).join("")}</ul></div>`).join("")}`;
+  document.querySelectorAll(".prep input").forEach((c) => c.addEventListener("change", () => { store.set(c.dataset.k, c.checked ? "1" : "0"); renderPrep(); renderToday(); }));
+}
+
+/* 求助 */
+async function copyText(text, label) {
+  let ok = true;
+  try { await navigator.clipboard.writeText(text); } catch (e) {
+    try { const t = document.createElement("textarea"); t.value = text; t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select(); ok = document.execCommand("copy"); t.remove(); } catch (e2) { ok = false; }
+  }
+  const s = $("#copy-status"); s.textContent = ok ? `已複製${label}` : "無法自動複製，請長按號碼選取"; setTimeout(() => s.textContent = "", 2000);
+}
+function renderHelp() {
+  const contacts = [
+    ["Wildlife Retreat at Taronga", "+61 2 9932 4888", "2a Bradleys Head Rd, Mosman NSW"],
+    ["Meriton Suites Sussex Street", "+61 2 9277 1111", "234 Sussex St, Sydney NSW"],
+    ["Meriton Suites Melbourne", "+61 2 9277 1111", "140 King St, Melbourne VIC"],
+    ["10/15 接機司機 Jinling Huang", "+61 422 347 666", "Elife #18533155"],
+    ["10/25 墨爾本送機 Huarenjie", "+86 178 5851 3382", "KAJ241154"],
+    ["Captain Cook 賞鯨客服", "+61 2 9206 1111", "2FRRJN，改期需 24 小時前通知"]
+  ];
+  $("#tab-help").innerHTML = `
+    <div class="block"><h2>緊急電話</h2>
+      <div class="phones"><div class="phone em"><span class="muted">警察、消防、救護</span><strong>000</strong></div>
+        <div class="phone"><span class="muted">駐雪梨辦事處急難救助</span><strong>0477 586 999</strong></div></div>
+      <p class="muted" style="margin:10px 0 0">000 接通後先說 Police、Fire 或 Ambulance。護照遺失或重大意外，找駐雪梨台北經濟文化辦事處（25 Martin Place）。</p></div>
+    <div class="block"><h2>非緊急協助</h2>
+      <div class="phones"><div class="phone"><span class="muted">警察協助（遺失、報案）</span><strong>131 444</strong></div>
+        <div class="phone"><span class="muted">健康諮詢 healthdirect</span><strong>1800 022 222</strong></div>
+        <div class="phone"><span class="muted">駐雪梨辦事處總機</span><strong>02 8650 4200</strong></div></div></div>
+    <div class="block"><h2>住宿與司機</h2>
+      <ul class="bare">${contacts.map((c, i) => `<li class="contact"><b>${esc(c[0])}</b><div class="tel">${esc(c[1])}</div><div class="muted">${esc(c[2])}</div>
+        <div class="actions" style="margin-top:6px"><button class="btn copy" type="button" data-copy="${esc(c[1])}" data-label="電話">複製電話</button>${i < 3 ? `<button class="btn copy" type="button" data-copy="${esc(c[0] + "\n" + c[2])}" data-label="地址">複製地址</button>` : ""}</div></li>`).join("")}</ul>
+      <div class="copy-status" id="copy-status" aria-live="polite"></div></div>
+    <div class="block"><h2>用得到的英文</h2><ul class="bare">
+      <li class="contact"><b>Could you call a taxi for us, please?</b><div class="muted">可以幫我們叫計程車嗎？</div></li>
+      <li class="contact"><b>Can we leave our luggage here until check-in?</b><div class="muted">入住前可以先寄放行李嗎？</div></li>
+      <li class="contact"><b>I lost my passport. Where is the nearest police station?</b><div class="muted">我的護照遺失了，最近的警察局在哪？</div></li></ul></div>`;
+  document.querySelectorAll(".copy").forEach((b) => b.addEventListener("click", () => copyText(b.dataset.copy, b.dataset.label)));
+}
+
+/* 分頁 */
+function switchTab(name) {
+  document.querySelectorAll("nav button").forEach((b) => { const on = b.dataset.tab === name; b.classList.toggle("active", on); b.setAttribute("aria-selected", String(on)); });
+  document.querySelectorAll("section.tab").forEach((s) => s.hidden = s.id !== "tab-" + name);
+  store.set("hm:tab", name);
+}
+document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => { switchTab(b.dataset.tab); window.scrollTo({ top: 0 }); }));
+
+renderOverview();
+showDay(tripState().i);
+renderMap();
+renderPrep();
+renderToday();
+renderHelp();
+const saved = store.get("hm:tab");
+if (saved && document.getElementById("tab-" + saved)) switchTab(saved);
+</script>
+
+</body>
+</html>
