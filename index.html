@@ -297,15 +297,16 @@ const TRIP = {
       ["今天已吃", "Lune Croissanterie 可頌", "已完成；其他天不重複安排"] ],
       food: [["已吃", "Lune Croissanterie", "10/20 已完成", "Lune Croissanterie Melbourne CBD"]] },
     { date: "10/21", wd: "三", label: "恐龍博物館・墨爾本大學・免費電車區", city: "墨爾本", items: [
-      ["08:30", "飯店早餐、出發", "從 Meriton Suites Melbourne 出發；電車出免費區須刷 myki"],
-      ["09:00–11:30", "Melbourne Museum 墨爾本博物館", "Dinosaur Walk 恐龍展；建議事先查門票與開放狀況"],
+      ["07:15–08:15", "Higher Ground 知名早午餐", "650 Little Bourke St；舊發電廠挑高建築；建議先預訂；不吃牛肉"],
+      ["08:15–09:15", "前往墨爾本博物館", "預留交通時間；免費電車區外須使用 myki"],
+      ["09:15–11:30", "Melbourne Museum 墨爾本博物館", "Dinosaur Walk 恐龍展；建議事先查門票與開放狀況"],
       ["11:30–12:00", "Carlton Gardens、皇家展覽館外觀", "步行拍照"],
       ["12:00–13:00", "Lygon Street 午餐", "Carlton 義大利街；不吃牛肉"],
       ["13:15–14:45", "墨爾本大學 University of Melbourne", "Old Quadrangle、South Lawn 校園拍照；從 Carlton 步行前往"],
       ["15:15–16:15", "State Library Victoria 州立圖書館", "圓頂閱覽室；從大學搭付費電車或步行"],
       ["16:30–17:15", "Royal Arcade 皇家拱廊", "CBD 免費電車區內；古典購物拱廊"],
       ["17:30 後", "市中心晚餐、自由活動", "可步行返回 King Street 飯店"] ],
-      food: [["午餐", "Lygon Street Carlton", "義大利料理；避開牛肉", "Lygon Street Carlton Melbourne"],["晚餐", "墨爾本 CBD", "彈性安排", "Melbourne CBD"]] },
+      food: [["早午餐", "Higher Ground", "招牌瑞可塔鬆餅、辣炒蛋；請確認不含牛肉", "Higher Ground 650 Little Bourke Street Melbourne"],["午餐", "Lygon Street Carlton", "義大利料理；避開牛肉", "Lygon Street Carlton Melbourne"],["晚餐", "墨爾本 CBD", "彈性安排", "Melbourne CBD"]] },
     { date: "10/22", wd: "四", label: "蒸汽小火車・企鵝島一日遊", city: "墨爾本", items: [
       ["07:30–08:30", "老墨旅遊集合", "依憑證確認實際集合地點與時間"],
       ["10:00", "Puffing Billy 蒸汽小火車", "已訂一日遊"],
@@ -357,6 +358,7 @@ const TRIP = {
   ],
   regions: [ { id: "syd", name: "雪梨市區" }, { id: "blue", name: "藍山" }, { id: "mel", name: "墨爾本市區" }, { id: "melout", name: "墨爾本近郊" } ],
   pois: [
+    { r: "mel", day: 8, name: "Higher Ground", lat: -37.8153, lng: 144.9533, note: "10/21 07:15 早午餐" },
     { r: "mel", day: 7, name: "維多利亞皇后市場", lat: -37.8076, lng: 144.9568, note: "10/20 已完成" },
     { r: "mel", day: 7, name: "Lune Croissanterie CBD", lat: -37.8136, lng: 144.9641, note: "10/20 已吃" },
     { r: "mel", day: 8, name: "Melbourne Museum", lat: -37.8033, lng: 144.9717, note: "09:00 恐龍展" },
