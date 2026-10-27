@@ -1,9 +1,12 @@
-# 澳洲蜜月旅行手帳
+# 澳洲與香港蜜月旅行手帳
 
-Phoebe & 柏儒 2026/10/14–10/26 澳洲蜜月（雪梨 5 晚、墨爾本 5 晚）的旅行網站。
+Phoebe & 柏儒的 2026 年蜜月旅行網站。
 
-單一靜態頁面 `index.html`，分成今日、行程、機票住宿、地圖、準備、求助六個分頁。資料都寫在檔案內的 `TRIP` 物件，修改行程只要改那一段。
+- [香港三日旅行手帳（10/27–10/29）](https://philgerald.github.io/australia_honeymoon_travel/hong-kong-travel.html)：迪士尼探索家住宿、每日行程、交通、美食、行李，以及 10/27 海港城 Zara。
+- [澳洲旅行手帳](https://philgerald.github.io/australia_honeymoon_travel/)：原澳洲行程。
 
-勾選的待辦只存在各自手機的瀏覽器，不會上傳。
+香港頁面為 `hong-kong-travel.html`；澳洲頁面為 `index.html`。
 
-注意：這個網站是公開的，內容包含訂位代號與聯絡電話。
+勾選的待辦與筆記只存在各自手機的瀏覽器，不會跨裝置同步。
+
+注意：這個網站是公開的；澳洲原頁面包含訂位代號與聯絡電話。
